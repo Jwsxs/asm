@@ -1,0 +1,24 @@
+BUFFER:
+	.SKIP 32
+
+.GLOBL _start
+
+_start:
+	MOV $0, %RAX # SYSCALL FOR INPUT: READ
+	MOV $0, %RDI # stdin
+	LEA BUFFER(%RIP), %RSI
+	MOV $32, %RDX
+	SYSCALL
+
+	MOV %RAX, %RDX
+	
+	# WRITE
+
+	MOV $1, %RAX
+	MOV $1, %RDI
+	LEA BUFFER(%RDX), %RSI
+	SYSCALL
+
+	MOV $60, %RAX
+	XOR %RDI, %RDI
+	SYSCALL

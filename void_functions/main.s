@@ -1,0 +1,38 @@
+BUFFER:
+	.SKIP 32
+
+.GLOBL _start
+
+_start:
+	PUSH %RBP
+	MOV %RSP, %RBP
+	SUB $16, %RBP
+	# MOVQ %FS:40, -0x8(%RBP)
+	# SYSCALL
+	
+	# MOV $0, %RAX
+	# MOV $0, %RDI
+	# LEA BUFFER(%RIP), %RSI
+	# MOV $32, %RDX
+	# SYSCALL
+	MOV $5, %R8D
+	# SYSCALL
+
+	MOV $3, %ESI
+	CALL ADD_TO
+	
+	MOV $60, %RAX
+	MOV $0, %RDI
+	XOR %RDX, %RDX
+	SYSCALL
+
+ADD_TO:
+	PUSH %RBP
+	MOV %RSP, %RBP
+	
+	LEA %R8D, %ESI
+	ADD %ESI, %EAX
+
+	NOP
+	POPQ %RBP
+	RET
