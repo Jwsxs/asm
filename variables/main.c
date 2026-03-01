@@ -1,13 +1,12 @@
 #include <stdio.h>
 
-extern int add(int a, int b);
+extern void ASM_MAIN(int MAX_VALUE);
 
 int main() {
-  int n1, n2;
-  scanf("%d%d", &n1, &n2);
-  int result = add(n1, n2);
-
-  printf("%d\n", result);
-
+  int MAX_VALUE;
+  scanf("%d", &MAX_VALUE);
+	
+  ASM_MAIN(MAX_VALUE);
+  
   return 0;
 }
