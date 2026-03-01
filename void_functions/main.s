@@ -1,6 +1,3 @@
-BUFFER:
-	.SKIP 32
-
 .GLOBL _start
 
 _start:
@@ -30,7 +27,7 @@ ADD_TO:
 	PUSH %RBP
 	MOV %RSP, %RBP
 	
-	LEA %R8D, %ESI
+	MOV %R8D, %EAX
 	ADD %ESI, %EAX
 
 	NOP
