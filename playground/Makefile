@@ -1,9 +1,18 @@
 .PHONY: clean
 .SILENT: all build run
 
-%: %.s
-	as $< -o $*.o
-	ld $*.o -o $@.out
+SRC:=main.s
+OBJ:=$(SRC:.s=.o)
+EXE:=$(OBJ:.o=)
+
+all: build run
+
+build:
+	as $(SRC) -o $(OBJ)
+	ld $(OBJ) -o $(EXE)
+
+run:
+	./$(EXE)
 
 clean:
-	rm -f *.o *.out
+	rm -f $(OBJ) $(EXE)
