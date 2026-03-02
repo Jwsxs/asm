@@ -1,24 +1,50 @@
-BUFFER:
-	.SKIP 32
+	.DATA
+MSG:	.ASCII "Hello, what's your name?\n"
+MSG_LEN = . - MSG # GET MSG LENGTH
 
-.GLOBL _start
-
-_start:
-	MOV $0, %RAX # SYSCALL FOR INPUT: READ
-	MOV $0, %RDI # stdin
-	LEA BUFFER(%RIP), %RSI
-	MOV $32, %RDX
-	SYSCALL
-
-	MOV %RAX, %RDX
+	.BSS
+.LCOMM BUFFER, 64
 	
-	# WRITE
+	.TEXT
+	.GLOBL _start
+	
+_start:
+	PUSH %RBP
+	MOVQ %RSP, %RBP
 
-	MOV $1, %RAX
-	MOV $1, %RDI
-	LEA BUFFER(%RDX), %RSI
-	SYSCALL
+	MOV $MSG, %RSI
+	MOV $MSG_LEN, %RDX
+	CALL PRINT_RSI
 
+	CALL GET_NAME
+
+	MOV $MSG, %RSI
+	MOV $7, %RDX
+	CALL PRINT_RSI
+	
+	MOV %R8, %RSI
+	MOV $64, %RDX
+	CALL PRINT_RSI
+	
 	MOV $60, %RAX
+	# MOV $0, %RDI
 	XOR %RDI, %RDI
 	SYSCALL
+
+PRINT_RSI:
+	MOV $1, %RAX
+	MOV $1, %RDI
+	SYSCALL
+	RET
+	
+GET_NAME:
+	MOV $0, %RAX
+	MOV $0, %RDI
+	MOV $BUFFER, %RSI
+	MOV $64, %RDX
+	SYSCALL
+
+	MOV %RSI, %R8
+	MOV $64, %R9
+
+	RET
