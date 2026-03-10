@@ -16,7 +16,7 @@ main:
 	xorl	%eax, %eax
 	movl	$5, -24(%rbp)
 	leaq	-24(%rbp), %rax
-	movl	(%rax), %eax
+	movq	(%rax), %eax
 	addl	$3, %eax
 	movl	%eax, -20(%rbp)
 	movl	$0, %eax

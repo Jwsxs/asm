@@ -19,4 +19,4 @@ run:
 	./$(EXE)
 
 clean:
-	rm -f ./$(OBJ) ./$(EXE) ./*.out
+	rm -f ./$(OBJ) ./$(EXE) ./*.out ./'#$(SRC)#'
