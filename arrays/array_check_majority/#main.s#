@@ -1,4 +1,3 @@
-
 	.DATA
 GMSG:	.ASCII "GREATER\n"
 GMSG_LEN = . - GMSG
