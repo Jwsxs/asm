@@ -30,7 +30,7 @@ _start:
 	
 READ_ARRAY:
 	MOV %RDI, %R8
-	CMPL $18, (%RSP, %RDI, 4) # 18
+	CMPL $0x12, (%RSP, %RDI, 4) # 0000 1001 - 
 	JGE GREATER
 	JMP LESS
 	

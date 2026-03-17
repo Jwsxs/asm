@@ -1,17 +1,10 @@
-	.DATA
-DOUBLE:	.DOUBLE 2.0
-SINGLE:	.FLOAT 1.0
-	
-	.TEXT
-	.GLOBL _start
+.GLOBL _start
 
 _start:
 	PUSH %RBP
 	MOVQ %RSP, %RBP
-
-#	MOVL $, %xmm0
-	MOVSD DOUBLE(%RIP), %XMM0 # DOUBLE
-	MOVSS SINGLE(%RIP), %XMM1 # SINGLE
+	MOV $1, %RAX
+	ADD $5, %RAX
 	
 _finish:
 	MOVQ $0X3C, %RAX

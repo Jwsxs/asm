@@ -26,7 +26,7 @@ _start:
 	
 READ_ARRAY:
 	MOV %RDI, %R8
-	TESTB $1, (%RSP, %RDI, 4)
+	TESTB $1, (%RSP, %RDI, 4) # 0000 0001 
 	JZ EVEN
 
 ODD: # IMPAR
