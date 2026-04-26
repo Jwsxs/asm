@@ -13,21 +13,40 @@ int MULT(int a, int b) {
 	return res;
 }
 
-int DIV(int a, int b) {
-	int res = a;
-	int temp = 0;
-	for (int i = 0; i < a; i++) {
-		res = SUB(res, 2);
-		temp++;
+void DIV(int* div, int* quo) {
+	int res = 0; // result
+
+	while (*div - *quo >= 0) {
+		*div = SUB(*div, *quo);
+		res++;
 	}
-	return temp;
+
+	// no final div é resto
+	// e res é resultado
+
+	// uma maneira simples de retornar sem usar mais uma variável é:
+	// -- aplica troca em div e quo (quo vira resto, e div vira o quociente)
+	// -- e então mandar o resto para div
+
+	// bitwise swap || usando XOR
+
+ 	*div ^= *quo;
+	*quo ^= *div;
+	*div ^= *quo;
+	*div = res;
+
+	// assim div retornando resultado e quo o resto
 }
 
 int main() {
 	printf("%d\n", ADD(36, 49));
 	printf("%d\n", SUB(25, 12));
-
 	printf("%d\n", MULT(27, 2));
-	printf("%d\n", DIV(34, 2));
+
+	int div = 100;
+	int quo = 25;
+	int res = quo;
+	DIV(&div, &res);
+	printf("%d + %d/%d\n", div, res, quo);
 	return 0;
 }
